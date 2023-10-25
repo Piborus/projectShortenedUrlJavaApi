@@ -1,0 +1,2 @@
+ALTER TABLE url
+ADD COLUMN accessNumber BIGINT;
