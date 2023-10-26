@@ -27,6 +27,7 @@ public class ShorterUrlService {
             ShorterUrl newShorterUrl = new ShorterUrl();
             newShorterUrl.setLongUrl(longUrl);
             newShorterUrl.setShortUrl(shortUrl);
+            newShorterUrl.setAccessNumber(0L);
             shorterUrlRepository.save(newShorterUrl);
             return shortUrl;
         }

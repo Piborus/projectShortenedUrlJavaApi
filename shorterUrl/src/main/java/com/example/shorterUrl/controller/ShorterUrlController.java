@@ -53,8 +53,14 @@ public class ShorterUrlController {
     }
 
     @GetMapping("/detalhar/{id}")
-    public DetalhaUrlDto detalhaUrlPorId(@PathVariable Long id) {
-        return shorterUrlService.detalhaUrlPorId(id);
+    public ResponseEntity<DetalhaUrlDto> detalhaUrlPorId(@PathVariable Long id) {
+        DetalhaUrlDto detalhaUrl = shorterUrlService.detalhaUrlPorId(id);
+
+        if (detalhaUrl != null) {
+            return ResponseEntity.ok(detalhaUrl);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping
