@@ -4,12 +4,14 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.nio.file.AccessDeniedException;
+
 @RestControllerAdvice
 public class TratadorDeErro {
 
@@ -34,10 +36,10 @@ public class TratadorDeErro {
         return ResponseEntity.badRequest().body(ex.getMessage());
     }
 
-//    @ExceptionHandler(BadCredentialsException.class)
-//    public ResponseEntity tratarErroBadCredentials() {
-//        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Falha na autenticação!");
-//    }
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity tratarErroBadCredentials() {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Falha na autenticação!");
+    }
 
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity tratarErroAcessoNegado() {

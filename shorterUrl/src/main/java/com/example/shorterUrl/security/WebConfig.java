@@ -12,8 +12,8 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
-        config.addAllowedOrigin("null"); // Permitir a origem "null" (para carregamento de arquivo local)
-        config.addAllowedHeader("*"); // Permitir todos os cabeçalhos
+        config.addAllowedOrigin("null");
+        config.addAllowedHeader("*");
         config.addAllowedMethod("GET");
         config.addAllowedMethod("POST");
         config.addAllowedMethod("PUT");

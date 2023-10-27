@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cliente API HTML</title>
+</head>
+<body>
+    <h1>Cliente de API HTML para Encurtar e Expandir URLs</h1>
+
+    <form id="loginForm">
+        <label for="login">Login:</label>
+        <input type="text" id="login" name="login" required>
+        <br>
+
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha" required>
+        <br>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <div id="resultadoLogin"></div>
+
+    <h2>Encurtar uma URL</h2>
+    <input type="text" id="longUrlInput" placeholder="URL longa">
+    <button onclick="encurtarUrl()">Encurtar</button>
+    <p><strong>URL curta gerada:</strong> <span id="shortUrl"></span></p>
+
+    <h2>Expandir uma URL</h2>
+    <input type="text" id="shortUrlInput" placeholder="URL curta">
+    <button onclick="expandirUrl()">Expandir</button>
+    <p><strong>URL longa correspondente:</strong> <span id="expandedUrl"></span></p>
+
+    <h2>Verificar a presença de uma URL encurtada</h2>
+    <input type="text" id="isPresentShortUrlInput" placeholder="URL curta">
+    <button onclick="verificarPresencaUrl()">Verificar Presença</button>
+    <p><strong>Resultado:</strong> <span id="isPresentResult"></span></p>
+
+    <h2>Detalhar uma URL por ID</h2>
+    <input type="text" id="detalharUrlIdInput" placeholder="ID da URL">
+    <button onclick="detalharUrlPorId()">Detalhar</button>
+    <div id="detalharResult"></div>
+
+    <h2>Listar URLs Paginadas</h2>
+    <button onclick="listarUrls()">Listar</button>
+    <div id="listarResult"></div>
+
+    <h2>Excluir uma URL por ID</h2>
+    <input type="text" id="excluirUrlIdInput" placeholder="ID da URL">
+    <button onclick="excluirUrlPorId()">Excluir</button>
+
+    <h2>Atualizar a URL original de uma URL encurtada</h2>
+    <input type="text" id="atualizarUrlIdInput" placeholder="ID da URL">
+    <input type="text" id="atualizarLongUrlInput" placeholder="Nova URL longa">
+    <button onclick="atualizarLongUrl()">Atualizar</button>
+
+    <h2>Obter as 10 principais URLs encurtadas</h2>
+    <button onclick="getTop10Urls()">Obter Top 10</button>
+    <div id="top10Result"></div>
+
+
+    <script>
+       const loginForm = document.getElementById("loginForm");
+const resultadoLogin = document.getElementById("resultadoLogin");
+
+loginForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const login = loginForm.login.value;
+    const senha = loginForm.senha.value;
+
+    const data = {
+        login: login,
+        senha: senha
+    };
+
+    fetch('http://localhost:8080/login', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.tokenJWT)
+        resultadoLogin.textContent = "Login bem-sucedido. Token JWT: " + data.tokenJWT;
+    })
+    .catch(error => {
+        resultadoLogin.textContent = "Erro ao fazer login: ";
+    });
+        });
+
+        function encurtarUrl() {
+            var longUrl = document.getElementById("longUrlInput").value;
+            fetch('http://localhost:8080/api', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(longUrl)
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.text();
+                } else {
+                    throw new Error('Erro ao encurtar a URL');
+                }
+            })
+            .then(data => {
+                document.getElementById("shortUrl").textContent = data;
+            })
+            .catch(error => {
+                console.error(error);
+                document.getElementById("shortUrl").textContent = "Erro ao encurtar a URL.";
+            });
+        }
+
+        function expandirUrl() {
+    var shortUrl = document.getElementById("shortUrlInput").value;
+    fetch(`http://localhost:8080/api/${shortUrl}`)
+    .then(response => {
+        if (response.ok) {
+            return fetch(`http://localhost:8080/api/${shortUrl}`, {
+                method: 'PUT'
+            });
+        } else {
+            throw new Error('URL curta não encontrada');
+        }
+    })
+    .then(() => {
+        return fetch(`http://localhost:8080/api/${shortUrl}`);
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.text();
+        } else {
+            throw new Error('URL curta não encontrada');
+        }
+    })
+    .then(data => {
+        document.getElementById("expandedUrl").textContent = data;
+    })
+    .catch(error => {
+        console.error(error);
+        document.getElementById("expandedUrl").textContent = "URL curta não encontrada.";
+    });
+}
+
+        function verificarPresencaUrl() {
+            var shortUrl = document.getElementById("isPresentShortUrlInput").value;
+            fetch(`http://localhost:8080/api/isPresent/${shortUrl}`)
+            .then(response => {
+                if (response.ok) {
+                    return response.text();
+                } else {
+                    throw new Error('URL curta não encontrada');
+                }
+            })
+            .then(data => {
+                document.getElementById("isPresentResult").textContent = data;
+            })
+            .catch(error => {
+                console.error(error);
+                document.getElementById("isPresentResult").textContent = "URL curta não encontrada.";
+            });
+        }
+
+        function detalharUrlPorId() {
+            var urlId = document.getElementById("detalharUrlIdInput").value;
+            fetch(`http://localhost:8080/api/detalhar/${urlId}`)
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('URL não encontrada');
+                }
+            })
+            .then(data => {
+                var detalharResult = document.getElementById("detalharResult");
+                detalharResult.innerHTML = `<strong>ID:</strong> ${data.id}<br><strong>URL Curta:</strong> ${data.shortUrl}<br><strong>URL Longa:</strong> ${data.longUrl}`;
+            })
+            .catch(error => {
+                console.error(error);
+                document.getElementById("detalharResult").textContent = "URL não encontrada.";
+            });
+        }
+
+        function listarUrls() {
+            fetch('http://localhost:8080/api')
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erro ao listar URLs');
+                }
+            })
+            .then(data => {
+                var listarResult = document.getElementById("listarResult");
+                listarResult.innerHTML = "<ul>";
+                data.content.forEach(url => {
+                    listarResult.innerHTML += `<li>ID: ${url.id}, URL Curta: ${url.shortUrl}, URL Longa: ${url.longUrl}</li>`;
+                });
+                listarResult.innerHTML += "</ul>";
+            })
+            .catch(error => {
+                console.error(error);
+                document.getElementById("listarResult").textContent = "Erro ao listar URLs.";
+            });
+        }
+
+        function excluirUrlPorId() {
+            var urlId = document.getElementById("excluirUrlIdInput").value;
+            fetch(`http://localhost:8080/api/${urlId}`, {
+                method: 'DELETE'
+            })
+            .then(response => {
+                if (response.ok) {
+                    document.getElementById("excluirUrlIdInput").value = "";
+                    listarUrls();
+                } else {
+                    throw new Error('Erro ao excluir a URL');
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        }
+
+        function atualizarLongUrl() {
+            var urlId = document.getElementById("atualizarUrlIdInput").value;
+            var newLongUrl = document.getElementById("atualizarLongUrlInput").value;
+            fetch(`http://localhost:8080/api`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: urlId, longUrl: newLongUrl })
+            })
+            .then(response => {
+                if (response.ok) {
+                    document.getElementById("atualizarUrlIdInput").value = "";
+                    document.getElementById("atualizarLongUrlInput").value = "";
+                    listarUrls();
+                } else {
+                    throw new Error('Erro ao atualizar a URL');
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        }
+
+        function getTop10Urls() {
+    fetch('http://localhost:8080/api/top-10')
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Erro ao obter as 10 principais URLs');
+        }
+    })
+    .then(data => {
+        var top10Result = document.getElementById("top10Result");
+        top10Result.innerHTML = "<ol>";
+
+        data.forEach(url => {
+            top10Result.innerHTML += `<li>ID: ${url.id}, URL Curta: ${url.shortUrl}, URL Longa: ${url.longUrl}, Acessos: ${url.accessNumber}</li>`;
+        });
+
+        top10Result.innerHTML += "</ol>";
+    })
+    .catch(error => {
+        console.error(error);
+        document.getElementById("top10Result").textContent = "Erro ao obter as 10 principais URLs.";
+    });
+}
+    </script>
+</body>
+</html>
