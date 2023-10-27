@@ -49,7 +49,7 @@ public class ShorterUrlService {
 
     private String generateShortUrl() {
         Random random = new Random();
-        byte[] randomBytes = new byte[6]; // Tamanho personalizável
+        byte[] randomBytes = new byte[6];
         random.nextBytes(randomBytes);
         String shortUrl = Base64.getUrlEncoder().withoutPadding().encodeToString(randomBytes);
         return shortUrl;
