@@ -1,0 +1,20 @@
+
+}
+java:S1488L"`Immediately return this expression instead of assigning it to the temporary variable "shortUrl".(™Çˆ˜8·˜¶µ·1
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(çŒŒ‘8¹˜¶µ·1
+ƒ
+java:S1450 "aRemove the "httpServletRequest" field and declare it as a local variable in the relevant methods.(ï€Œóùÿÿÿÿ8Ê˜¶µ·1
+v
+java:S1450!"YRemove the "serviceUrl" field and declare it as a local variable in the relevant methods.(Òô‹í8Ê˜¶µ·1
+^
+java:S1075#"ARefactor your code to get this URI from a customizable parameter.(Éëå8Í˜¶µ·1
+:
+java:S2119I"Save and re-use this "Random".(¼İÅf8Ó˜¶µ·1
+N
+java:S1874‚"+Remove this use of "URL"; it is deprecated.(ŒıÕ–üÿÿÿÿ8Ù˜¶µ·1
+X
+java:S1068 "6Remove this unused "httpServletRequest" private field.(ï€Œóùÿÿÿÿ8Û˜¶µ·1
+K
+java:S1068!".Remove this unused "serviceUrl" private field.(Òô‹í8Û˜¶µ·1
+R
+java:S1144€"/Remove this unused private "isValidURL" method.(£×ÏÑşÿÿÿÿ8Û˜¶µ·1

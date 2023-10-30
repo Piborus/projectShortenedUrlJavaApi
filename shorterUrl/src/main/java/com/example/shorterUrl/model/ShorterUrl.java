@@ -32,7 +32,7 @@ public class ShorterUrl {
 
     @Column(name = "accessnumber" )
     @NotNull
-    private Long accessNumber;
+    private Long accessNumber = 0L;
 
 }
 

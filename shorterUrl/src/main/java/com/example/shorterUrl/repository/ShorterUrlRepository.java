@@ -19,4 +19,8 @@ public interface ShorterUrlRepository extends JpaRepository<ShorterUrl, Long> {
     List<ShorterUrl> findFirst10ByOrderByAccessNumberDesc();
 
     Page<DetalhaUrlDto> findAllProjectedBy(Pageable paginacao);
+
+    boolean existsByShortUrl(String shortUrl);
+
+    boolean existsByLongUrl(String longUrl);
 }
