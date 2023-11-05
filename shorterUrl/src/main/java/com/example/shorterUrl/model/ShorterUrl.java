@@ -21,18 +21,28 @@ public class ShorterUrl {
     private Long id;
 
     @Column(name = "shorturl")
-    @NotNull(message = "{field.notnull")
-    @NotEmpty(message = "{field.notempty}")
+    @NotNull(message = "{field.notnull}")
+    @NotEmpty(message = "{field.not-empty}")
     private String shortUrl;
 
     @Column(name = "longurl")
     @NotNull(message = "{field.notnull}")
-    @NotEmpty(message = "{field.notempty}")
+    @NotEmpty(message = "{field.not-empty}")
     private String longUrl;
 
     @Column(name = "accessnumber" )
     @NotNull
     private Long accessNumber = 0L;
 
+    public ShorterUrl(String aShort, String aLong) {
+        this.shortUrl = aShort;
+        this.longUrl = aLong;
+    }
+
+    public ShorterUrl(String s, String s1, Long i) {
+        this.shortUrl = s;
+        this.longUrl = s1;
+        this.accessNumber = i;
+    }
 }
 
