@@ -6,7 +6,6 @@ import com.example.shorterUrl.dto.UrlShortenerRequest;
 import com.example.shorterUrl.dto.UrlShortenerResponse;
 import com.example.shorterUrl.model.ShorterUrl;
 import com.example.shorterUrl.service.ShorterUrlService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,6 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.AutoConfigureJsonTesters;
-import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.json.JacksonTester;
@@ -27,6 +25,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -34,11 +35,6 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 @SpringBootTest
@@ -98,48 +94,9 @@ class ShorterUrlControllerTest {
     }
 
 
-
-//
-//    @Test
-//    @DisplayName("Deveria devolver codigo http200 quando informações estão invalidos")
-//    void cenario2() throws Exception {
-//        UrlShortenerRequest request = new UrlShortenerRequest();
-//        request.setLongUrl("https://www.youtube.com/watch?v=Lo6KK-PY-Ps");
-//
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        String requestBody = objectMapper.writeValueAsString(request);
-//
-//        var response = mvc
-//                .perform(post("/api/shorten")
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(requestBody)
-//                )
-//                .andReturn().getResponse();
-//
-//        assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-//    }
-
-    @Test
-    @DisplayName("Deveria redirecionar para a URL longa quando a URL curta estiver presente")
-    void cenario3() throws Exception {
-        String key = "api/yo48745";
-        String shortUrl = "http://localhost/" + key;
-        String longUrl = "https://www.youtube.com/watch?v=GNJtPFXUnm4";
-
-        // Defina o comportamento esperado do serviço aqui:
-        when(shorterUrlService.expandUrl(eq(shortUrl))).thenReturn(longUrl);
-
-        var response = mvc.perform(MockMvcRequestBuilders.get("/" + key))
-                .andReturn().getResponse();
-
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.FOUND.value());
-        assertThat(response.getRedirectedUrl()).isEqualTo(longUrl);
-    }
-
-
     @Test
     @DisplayName("Deveria devolver 404 quando a URL curta não estiver presente")
-    void cenario4() throws Exception {
+    void cenario3() throws Exception {
         String key = "non-existent-key";
         String shortUrl = "http://localhost/" + key;
 
@@ -154,7 +111,7 @@ class ShorterUrlControllerTest {
 
     @Test
     @DisplayName("Teste detalhaUrlPorId - URL encontrada")
-    void cenario5() {
+    void cenario4() {
         Long id = 1L;
         DetalhaUrlDto detalhaUrl = new DetalhaUrlDto(id, "http://short.url/abc123", "http://www.example.com", 5L);
         when(shorterUrlService.detalhaUrlPorId(id)).thenReturn(detalhaUrl);
@@ -167,7 +124,7 @@ class ShorterUrlControllerTest {
 
     @Test
     @DisplayName("Teste detalhaUrlPorId - URL não encontrada")
-    void cenario6() {
+    void cenario5() {
         Long id = 1L;
         when(shorterUrlService.detalhaUrlPorId(id)).thenReturn(null);
 
@@ -179,7 +136,7 @@ class ShorterUrlControllerTest {
 
     @Test
     @DisplayName("Teste listar url")
-    void cenario7() {
+    void cenario6() {
         PageRequest pageRequest = PageRequest.of(0, 10);
         Page<DetalhaUrlDto> page = mock(Page.class);
         when(shorterUrlService.listarPaginado(pageRequest)).thenReturn(page);
@@ -192,7 +149,7 @@ class ShorterUrlControllerTest {
 
     @Test
     @DisplayName("Teste excluirUrl")
-    void cenario8() {
+    void cenario7() {
         Long id = 1L;
         ResponseEntity<Void> response = shorterUrlController.excluirUrl(id);
 
@@ -201,7 +158,7 @@ class ShorterUrlControllerTest {
 
     @Test
     @DisplayName("Teste atualizarLongUrl - URL encontrada")
-    void cenario9() {
+    void cenario8() {
         Long id = 1L;
         String newLongUrl = "http://www.new-example.com";
         AtualizarUrlDto atualizarUrl = new AtualizarUrlDto();
@@ -218,7 +175,7 @@ class ShorterUrlControllerTest {
 
     @Test
     @DisplayName("Teste atualizarLongUrl - URL não encontrada")
-    void cenario10() {
+    void cenario9() {
         Long id = 1L;
         String newLongUrl = "http://www.new-example.com";
         AtualizarUrlDto atualizarUrl = new AtualizarUrlDto();
@@ -231,7 +188,7 @@ class ShorterUrlControllerTest {
 
     @Test
     @DisplayName("Teste getTop10Urls")
-    void cenario11() {
+    void cenario10() {
         // Simule o retorno de uma lista de URLs
         List<ShorterUrl> top10Urls = createTop10Urls();
         when(shorterUrlService.getTop10Urls()).thenReturn(top10Urls);

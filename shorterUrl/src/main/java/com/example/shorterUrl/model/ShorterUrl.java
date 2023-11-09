@@ -30,7 +30,7 @@ public class ShorterUrl {
     @NotEmpty(message = "{field.not-empty}")
     private String longUrl;
 
-    @Column(name = "accessnumber" )
+    @Column(name = "accessnumber")
     @NotNull
     private Long accessNumber = 0L;
 
