@@ -2,10 +2,10 @@ package com.example.shorterUrl.dto;
 
 import com.example.shorterUrl.model.ShorterUrl;
 
-public record DetalhaUrlDto(Long id, String shortUrl, String longUrl){
+public record DetalhaUrlDto(Long id, String shortUrl, String longUrl, Long accessNumber){
 
     public DetalhaUrlDto(ShorterUrl shorterUrl){
-        this(shorterUrl.getId(), shorterUrl.getShortUrl(), shorterUrl.getLongUrl());
+        this(shorterUrl.getId(), shorterUrl.getShortUrl(), shorterUrl.getLongUrl(), shorterUrl.getAccessNumber());
     }
 
 }

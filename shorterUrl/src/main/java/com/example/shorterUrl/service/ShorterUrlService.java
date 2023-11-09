@@ -77,7 +77,7 @@ public class ShorterUrlService {
     }
 
     public static String generateShortKey(String longUrl) {
-        if(longUrl == null) return "";
+        if (longUrl == null) return "";
         longUrl = getWebsiteName(longUrl);
         if (longUrl.length() <= 2) {
             return longUrl.toLowerCase();
@@ -154,11 +154,7 @@ public class ShorterUrlService {
         byte[] randomBytes = new byte[6];
         random.nextBytes(randomBytes);
         String shortUrl = Base64.getUrlEncoder().withoutPadding().encodeToString(randomBytes);
-
-        // Obtenha o nome do site a partir do longUrl
         String websiteName = getWebsiteName(longUrl);
-
-        // Combine o nome do site com o código curto gerado
         String combinedShortUrl = websiteName + "/" + shortUrl;
 
         return combinedShortUrl;
@@ -189,6 +185,7 @@ public class ShorterUrlService {
     public void deleteUrlPorId(Long id) {
         shorterUrlRepository.deleteById(id);
     }
+
 
     public ShorterUrl atualizarLongUrl(Long id, String longUrl) {
         ShorterUrl existingShorterUrl = shorterUrlRepository.findById(id).orElse(null);

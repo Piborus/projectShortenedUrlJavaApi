@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,10 +24,13 @@ class ShorterUrlRepositoryTest {
     @Autowired
     private ShorterUrlRepository shorterUrlRepository;
 
+    @Autowired
+    private TestEntityManager entityManager;
+
     @Test
-    @DisplayName("Should return ShorterUrl if it exists by short URL")
+    @DisplayName("Short URL existente no banco de dados")
     void findByShortUrl_ShouldReturnShorterUrlIfExists() {
-        // Cenário 1: Short URL existente no banco de dados
+        // Cenário 1:
         ShorterUrl shorterUrl = new ShorterUrl("short", "long");
         shorterUrlRepository.save(shorterUrl);
         ShorterUrl foundUrl = shorterUrlRepository.findByShortUrl("short");
@@ -35,17 +39,17 @@ class ShorterUrlRepositoryTest {
     }
 
     @Test
-    @DisplayName("Should return null if Short URL does not exist")
+    @DisplayName("Short URL não existe no banco de dados")
     void findByShortUrl_ShouldReturnNullIfNotExists() {
-        // Cenário 2: Short URL não existe no banco de dados
+        // Cenário 2:
         ShorterUrl foundUrl = shorterUrlRepository.findByShortUrl("nonexistent");
         assertNull(foundUrl);
     }
 
     @Test
-    @DisplayName("Should return ShorterUrl if it exists by long URL")
+    @DisplayName("Long URL existente no banco de dados")
     void findByLongUrl_ShouldReturnShorterUrlIfExists() {
-        // Cenário 1: Long URL existente no banco de dados
+        // Cenário 1:
         ShorterUrl shorterUrl = new ShorterUrl("short", "long");
         shorterUrlRepository.save(shorterUrl);
         ShorterUrl foundUrl = shorterUrlRepository.findByLongUrl("long");
@@ -54,9 +58,8 @@ class ShorterUrlRepositoryTest {
     }
 
     @Test
-    @DisplayName("Should return the first 10 ShorterUrls ordered by access number")
+    @DisplayName("Existem mais de 10 registros no banco de dados")
     void findFirst10ByOrderByAccessNumberDesc_ShouldReturnFirst10ShorterUrls() {
-        // Cenário 1: Existem mais de 10 registros no banco de dados
         for (int i = 0; i < 15; i++) {
             shorterUrlRepository.save(new ShorterUrl("short" + i, "long" + i, (long) i)); // Converta o valor int para Long
         }
@@ -67,18 +70,15 @@ class ShorterUrlRepositoryTest {
     }
 
     @Test
-    @DisplayName("Should return an empty list when there are less than 10 ShorterUrls")
+    @DisplayName("Existem menos de 10 registros no banco de dados")
     void findFirst10ByOrderByAccessNumberDesc_ShouldReturnEmptyListIfFewerThan10ShorterUrls() {
-        // Cenário 2: Existem menos de 10 registros no banco de dados
         List<ShorterUrl> first10Urls = shorterUrlRepository.findFirst10ByOrderByAccessNumberDesc();
         assertTrue(first10Urls.isEmpty());
     }
 
     @Test
-    @DisplayName("Should return ShorterUrls with valid pagination")
+    @DisplayName("Páginação válida com resultados")
     void findAllProjectedBy_ShouldReturnShorterUrlsWithValidPagination() {
-        // Cenário 1: Páginação válida com resultados
-        // Insira dados de teste no banco de dados
         for (int i = 1; i <= 10; i++) {
             shorterUrlRepository.save(new ShorterUrl("short" + i, "long" + i));
         }
@@ -87,30 +87,23 @@ class ShorterUrlRepositoryTest {
         Page<DetalhaUrlDto> resultPage = shorterUrlRepository.findAllProjectedBy(pageable);
         assertEquals(5, resultPage.getNumberOfElements());
 
-        // Verifique se a página possui os resultados esperados.
     }
 
     @Test
-    @DisplayName("Should return an empty page with invalid pagination")
+    @DisplayName("Páginação válida sem resultados")
     void findAllProjectedBy_ShouldReturnEmptyPageWithInvalidPagination() {
-        // Cenário 2: Páginação válida sem resultados
-        // Implemente um cenário de teste com paginação válida, mas sem resultados.
-        // Certifique-se de criar dados insuficientes para preencher a página.
-
         Pageable pageable = PageRequest.of(1, 5);
         Page<DetalhaUrlDto> resultPage = shorterUrlRepository.findAllProjectedBy(pageable);
         assertTrue(resultPage.isEmpty());
     }
 
     @Test
-    @DisplayName("Should return an empty page with invalid pagination parameters")
+    @DisplayName("Páginação inválida (por exemplo, página negativa)")
     void findAllProjectedBy_ShouldReturnEmptyPageWithInvalidPaginationParameters() {
-        // Cenário 3: Páginação inválida (por exemplo, página negativa)
-        // Implemente um cenário de teste com parâmetros de paginação inválidos, como uma página negativa.
-        // Certifique-se de criar dados suficientes para testar a paginação.
-
         Pageable pageable = PageRequest.of(0, 5);
         Page<DetalhaUrlDto> resultPage = shorterUrlRepository.findAllProjectedBy(pageable);
         assertTrue(resultPage.isEmpty());
     }
+
+
 }

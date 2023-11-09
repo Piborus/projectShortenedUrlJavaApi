@@ -17,7 +17,7 @@ public class validator {
     @Bean
     public MessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasename("ValidationMessages"); // O nome do seu arquivo de mensagens
+        messageSource.setBasename("ValidationMessages");
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
     }

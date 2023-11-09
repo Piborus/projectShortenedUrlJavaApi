@@ -9,4 +9,5 @@ public class UrlShortenerRequest {
 
     private String longUrl;
 
+
 }

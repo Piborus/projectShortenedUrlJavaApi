@@ -1,20 +1,47 @@
 
-}
-java:S1488L"`Immediately return this expression instead of assigning it to the temporary variable "shortUrl".(™Çˆ˜8·˜¶µ·1
+9
+java:S1643\"Use a StringBuilder instead.(Œ£ÎÂ8êï»õº1
+…
+java:S1488"hImmediately return this expression instead of assigning it to the temporary variable "combinedShortUrl".(ÎÏ×y8ìï»õº1
 v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(çŒŒ‘8¹˜¶µ·1
-ƒ
-java:S1450 "aRemove the "httpServletRequest" field and declare it as a local variable in the relevant methods.(ï€Œóùÿÿÿÿ8Ê˜¶µ·1
-v
-java:S1450!"YRemove the "serviceUrl" field and declare it as a local variable in the relevant methods.(Òô‹í8Ê˜¶µ·1
-^
-java:S1075#"ARefactor your code to get this URI from a customizable parameter.(Éëå8Í˜¶µ·1
+_
+java:S6813$"BRemove this field injection and use constructor injection instead.(êæÄŞ8Ûò»õº1
+_
+java:S6813*"BRemove this field injection and use constructor injection instead.(êæÄŞ8Ûò»õº1
 :
-java:S2119I"Save and re-use this "Random".(¼İÅf8Ó˜¶µ·1
+java:S2119Z"Save and re-use this "Random".(¼İÅf8Ó˜¶µ·1
+]	java:S125a"<This block of commented-out lines of code should be removed.(¸ÛàÙşÿÿÿÿ8ó»õº1
+]	java:S125p"<This block of commented-out lines of code should be removed.(Ò°ø°øÿÿÿÿ8ó»õº1
+^	java:S125‚"<This block of commented-out lines of code should be removed.(¾‹£øÿÿÿÿ8’ó»õº1
+Y	java:S125"<This block of commented-out lines of code should be removed.(Ìóúî8”ó»õº1
+;
+java:S2119™"Save and re-use this "Random".(¼İÅf8•ó»õº1
+\
+java:S1128"@Remove this unused import 'com.google.gson.JsonSyntaxException'.(èİ£68š§ª€»1
 N
-java:S1874‚"+Remove this use of "URL"; it is deprecated.(ŒıÕ–üÿÿÿÿ8Ù˜¶µ·1
-X
-java:S1068 "6Remove this unused "httpServletRequest" private field.(ï€Œóùÿÿÿÿ8Û˜¶µ·1
-K
-java:S1068!".Remove this unused "serviceUrl" private field.(Òô‹í8Û˜¶µ·1
+java:S1128	",Remove this unused import 'org.jsoup.Jsoup'.(Ù±šªûÿÿÿÿ8š§ª€»1
 R
-java:S1144€"/Remove this unused private "isValidURL" method.(£×ÏÑşÿÿÿÿ8Û˜¶µ·1
+java:S1128
+"5Remove this unused import 'org.jsoup.nodes.Document'.(ô¯É8š§ª€»1
+V
+java:S1128"4Remove this unused import 'org.jsoup.nodes.Element'.(ıƒ‘öşÿÿÿÿ8š§ª€»1
+S
+java:S1128"6Remove this unused import 'org.jsoup.select.Elements'.(ëÂè8œ§ª€»1
+U
+java:S1128"8Remove this unused import 'com.google.gson.JsonElement'.(ğ†˜³8œ§ª€»1
+T
+java:S1128"7Remove this unused import 'com.google.gson.JsonObject'.(µÊ´½8œ§ª€»1
+T
+java:S1128"7Remove this unused import 'com.google.gson.JsonParser'.(Œƒ¸Æ8œ§ª€»1
+d
+java:S1128"GRemove this unused import 'org.springframework.web.util.UriComponents'.(Ó‡¬¯8œ§ª€»1
+k
+java:S1128"NRemove this unused import 'org.springframework.web.util.UriComponentsBuilder'.(ßª»Ó8œ§ª€»1
+R
+java:S1128"0Remove this unused import 'java.io.IOException'.(ªº»Úıÿÿÿÿ8œ§ª€»1
+^
+java:S1128"ARemove this unused import 'java.io.UnsupportedEncodingException'.(Ãµ…“8œ§ª€»1
+Z
+java:S1128"8Remove this unused import 'java.net.URISyntaxException'.(Ä®íÿÿÿÿÿ8œ§ª€»1
+M
+java:S1128"0Remove this unused import 'java.net.URLEncoder'.(ê¢ºÆ8§ª€»1

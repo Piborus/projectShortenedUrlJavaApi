@@ -1,16 +1,8 @@
 
-{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(îõ«Åùÿÿÿÿ8ı¡Ã´·1
-G	java:S106@"+Replace this use of System.out by a logger.(ù¼øÂ8âÊµÇ·1
-G	java:S106B"+Replace this use of System.out by a logger.(†Ô˜Ú8ãÊµÇ·1
-G	java:S106E"+Replace this use of System.out by a logger.(İœ®8ãÊµÇ·1
-L	java:S106I"+Replace this use of System.out by a logger.(ªŠ•ûÿÿÿÿÿ8ãÊµÇ·1
-]	java:S125X"<This block of commented-out lines of code should be removed.(Êï×ûÿÿÿÿ8æÊµÇ·1
-]	java:S125d"<This block of commented-out lines of code should be removed.(¥¿»›üÿÿÿÿ8æÊµÇ·1
-`
-java:S1128"DRemove this unused import 'jakarta.servlet.http.HttpServletRequest'.(õ38îÊµÇ·1
-g
-java:S1128"ERemove this unused import 'jakarta.servlet.http.HttpServletResponse'.(ÂÓÕÇÿÿÿÿÿ8ïÊµÇ·1
-X
-java:S1128"6Remove this unused import 'javax.swing.text.Document'.(·ßó’şÿÿÿÿ8ïÊµÇ·1
-W
-java:S1128"5Remove this unused import 'javax.swing.text.Element'.(æÆÍ‚ıÿÿÿÿ8ïÊµÇ·1
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(îõ«Åùÿÿÿÿ8å‹£Úº1
+_
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8ŠŒ£Úº1
+]	java:S125+"<This block of commented-out lines of code should be removed.(ùÉò“øÿÿÿÿ8“Œ£Úº1
+]	java:S1252"<This block of commented-out lines of code should be removed.(‘³ìĞÿÿÿÿÿ8“Œ£Úº1
+F
+java:S1940D")Use the opposite operator ("!=") instead.(¬ÓÏâ8©øîÚº1
