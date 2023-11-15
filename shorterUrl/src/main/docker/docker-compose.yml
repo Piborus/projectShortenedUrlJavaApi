@@ -1,0 +1,53 @@
+#version: '2'
+#
+#services:
+#  app:
+#    image: 'docker-spring-boot-postgres:latest'
+#    build:
+#      context: ../../..
+#    container_name: app
+#    depends_on:
+#      - db
+#    environment:
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/url  # Alterado de localhost para o nome do serviço "db"
+#      - SPRING_DATASOURCE_USERNAME=postgres
+#      - SPRING_DATASOURCE_PASSWORD=123
+#      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+#    networks:
+#      - mynetwork  # Nome da rede personalizada
+#
+#  db:
+#    image: 'postgres:16-alpine'
+#    container_name: db
+#    environment:
+#      - POSTGRES_USER=postgres
+#      - POSTGRES_PASSWORD=123
+##    networks:
+##      - mynetwork  # Nome da rede personalizada
+##
+##networks:
+##  mynetwork:  # Nome da rede personalizada
+
+version: '2'
+
+services:
+  app:
+    image: 'docker-spring-boot-postgres:latest'
+    build:
+      context: .
+    container_name: app
+    depends_on:
+      - db
+    command: ["./wait-for-it.sh", "db:5432", "--", "java", "-jar", "shorterUrl-0.0.1-SNAPSHOT.jar"]
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/compose-postgres
+      - SPRING_DATASOURCE_USERNAME=compose-postgres
+      - SPRING_DATASOURCE_PASSWORD=compose-postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+  db:
+    image: 'postgres:16-alpine'
+    container_name: db
+    environment:
+      - POSTGRES_USER=compose-postgres
+      - POSTGRES_PASSWORD=compose-postgres
