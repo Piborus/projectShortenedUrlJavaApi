@@ -1,0 +1,78 @@
+#version: '2'
+#
+#services:
+#  app:
+#    image: 'docker-spring-boot-postgres:latest'
+#    build:
+#      context: ../../..
+#    container_name: app
+#    depends_on:
+#      - db
+#    environment:
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/url  # Alterado de localhost para o nome do serviço "db"
+#      - SPRING_DATASOURCE_USERNAME=postgres
+#      - SPRING_DATASOURCE_PASSWORD=123
+#      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+#    networks:
+#      - mynetwork  # Nome da rede personalizada
+#
+#  db:
+#    image: 'postgres:16-alpine'
+#    container_name: db
+#    environment:
+#      - POSTGRES_USER=postgres
+#      - POSTGRES_PASSWORD=123
+##    networks:
+##      - mynetwork  # Nome da rede personalizada
+##
+##networks:
+##  mynetwork:  # Nome da rede personalizada
+
+#version: '3'
+#services:
+#  web:
+#    build:
+#      dockerfile: Dockerfile
+#    container_name: your-container-name
+#    ports:
+#      - "8080:8080"
+#    volumes:
+#      - ./target:/app
+#    depends_on:
+#      - postgres
+#  postgres:
+#    image: postgres:latest
+#    container_name: postgres-container
+#    environment:
+#      POSTGRES_DB: url
+#      POSTGRES_USER: postgresql
+#      POSTGRES_PASSWORD: 123
+#    ports:
+#      - "5432:5432"
+
+version: '3'
+
+services:
+  api:
+    build: .
+    ports:
+      - "8080:8080"  # Adjust the port mapping for Java application
+    volumes:
+      - .:/app  # Adjust the volume mount point for Java application
+    environment:
+      SPRING_PROFILES_ACTIVE: "prod"  # Set the Spring profile for development
+    depends_on:
+      - postgres
+    links:
+      - postgres:db  # Link the Java application to the PostgreSQL container
+
+  postgres:
+    image: "postgres:alpine"
+    environment:
+      POSTGRES_DB: jdbc:postgresql://localhost:5432/url?useSSL=false
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+    command: ["postgres", "-c", "listen_addresses=0.0.0.0", "-c", "lc_messages=C.UTF-8"]
+  redis:
+    image: "redis:alpine"
+

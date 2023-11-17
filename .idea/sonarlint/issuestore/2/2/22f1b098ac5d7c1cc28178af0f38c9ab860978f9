@@ -1,8 +1,8 @@
 
-{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(îõ«Åùÿÿÿÿ8å‹£Úº1
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(îõ«Åùÿÿÿÿ8òý«ì½1
 _
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞ8ŠŒ£Úº1
-]	java:S125+"<This block of commented-out lines of code should be removed.(ùÉò“øÿÿÿÿ8“Œ£Úº1
-]	java:S1252"<This block of commented-out lines of code should be removed.(‘³ìÐÿÿÿÿÿ8“Œ£Úº1
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞ8›þ«ì½1
+]	java:S125+"<This block of commented-out lines of code should be removed.(ùÉò“øÿÿÿÿ8¥þ«ì½1
+]	java:S1252"<This block of commented-out lines of code should be removed.(‘³ìÐÿÿÿÿÿ8¥þ«ì½1
 F
-java:S1940D")Use the opposite operator ("!=") instead.(¬ÓÏâ8©øîÚº1
+java:S1940D")Use the opposite operator ("!=") instead.(¬ÓÏâ8§þ«ì½1

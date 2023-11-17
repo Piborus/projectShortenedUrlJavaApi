@@ -123,7 +123,8 @@ public class ShorterUrlController {
     }
 
     @GetMapping("/top-10")
-    public List<ShorterUrl> getTop10Urls() {
-        return shorterUrlService.getTop10Urls();
+    public ResponseEntity<List<ShorterUrl>> getTop10Urls() {
+        shorterUrlService.getTop10Urls();
+        return ResponseEntity.ok().build();
     }
 }

@@ -193,7 +193,7 @@ class ShorterUrlControllerTest {
         List<ShorterUrl> top10Urls = createTop10Urls();
         when(shorterUrlService.getTop10Urls()).thenReturn(top10Urls);
 
-        List<ShorterUrl> response = shorterUrlController.getTop10Urls();
+        ResponseEntity<List<ShorterUrl>> response = shorterUrlController.getTop10Urls();
 
         assertThat(response).isEqualTo(top10Urls);
     }

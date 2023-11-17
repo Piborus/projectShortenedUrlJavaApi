@@ -1,12 +1,8 @@
 com\example\shorterUrl\configuration\validator.class
-com\example\shorterUrl\security\DadosTokenJWT.class
-com\example\shorterUrl\security\SecurityConfigurations.class
 com\example\shorterUrl\service\ShorterUrlService.class
 com\example\shorterUrl\exception\TratadorDeErro.class
-com\example\shorterUrl\security\SecurityFilter.class
 com\example\shorterUrl\dto\AtualizarUrlDto.class
 com\example\shorterUrl\dto\UrlShortenerResponse.class
-com\example\shorterUrl\model\Usuario.class
 com\example\shorterUrl\exception\ValidacaoException.class
 com\example\shorterUrl\dto\DadosAutenticacao.class
 com\example\shorterUrl\exception\TratadorDeErro$DadosErroValidacao.class
@@ -17,9 +13,5 @@ com\example\shorterUrl\repository\ShorterUrlRepository.class
 com\example\shorterUrl\security\WebConfig.class
 com\example\shorterUrl\ShorterUrlApplication.class
 com\example\shorterUrl\model\ShorterUrl.class
-com\example\shorterUrl\controller\AutenticacaoController.class
 com\example\shorterUrl\dto\UrlShortenerRequest.class
-com\example\shorterUrl\repository\UsuarioRepository.class
 com\example\shorterUrl\exception\InvalidUrlException.class
-com\example\shorterUrl\service\AutenticaoService.class
-com\example\shorterUrl\security\TokenService.class
